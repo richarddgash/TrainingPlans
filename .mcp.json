@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "garmin": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@trainingloadai/garmin-personal-api-mcp"],
+      "env": {
+        "GARMIN_PERSONAL_API_KEY": "${GARMIN_PERSONAL_API_KEY}"
+      }
+    }
+  }
+}
