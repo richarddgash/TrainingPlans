@@ -39,7 +39,7 @@ const cards = [
     pill: y.steps_met ? `${n(y.steps - STEPS)} over target` : `${n(STEPS - y.steps)} short` },
   { c: '#8a4fd8', icon: '🌙', name: 'Sleep', val: hm(y.sleep_min), target: `Target ${hm(SLEEP)}`, ratio: y.sleep_min / SLEEP, ok: y.sleep_met,
     pill: y.sleep_met ? `${hm(y.sleep_min - SLEEP)} over target` : `${hm(SLEEP - y.sleep_min)} short` },
-  { c: '#e0700f', icon: '🍽️', name: 'Calories eaten', val: y.eaten_kcal == null ? 'Not logged' : n(y.eaten_kcal),
+  { c: '#e0700f', icon: '🍽️', name: 'Calories', val: y.eaten_kcal == null ? 'Not logged' : n(y.eaten_kcal),
     target: `Target ${n(y.cal_target)} (${n(y.burned_kcal)} burned, less ${MARGIN})`, ratio: (y.eaten_kcal ?? 0) / y.cal_target, ok: y.cal_met,
     pill: y.cal_diff == null ? 'No food logged' : y.cal_met ? `${n(-y.cal_diff)} under target` : `${n(y.cal_diff)} over target` },
   { c: '#0e8ea6', icon: '💧', name: 'Hydration', val: L(y.water_ml), target: `Target ${(WATER / 1000).toFixed(1)} L`, ratio: y.water_ml / WATER, ok: y.water_met,
@@ -82,7 +82,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>
   .grid .hd.last { color: #1d2230; box-shadow: inset 2px 0 0 #1d2230, inset -2px 0 0 #1d2230, inset 0 2px 0 #1d2230; }
   .note { margin: 14px 0 0; font-size: 15px; color: #5b6170; }
 </style></head><body><div class="wrap">
-  <div><h1>Yesterday: ${esc(day(y.date, true))}</h1><p class="sub"><b>${metCount}</b> of 4 targets met. ${esc(metText)}</p></div>
+  <div><h1>${esc(day(y.date, true))}</h1><p class="sub"><b>${metCount}</b> of 4 targets met. ${esc(metText)}</p></div>
   <div class="cards">${cards.map((k) => `<div class="card" style="--c:${k.c}">
     <h2><span class="ic">${k.icon}</span>${esc(k.name)}</h2><div class="val">${esc(k.val)}</div><div class="tg">${esc(k.target)}</div>
     <div class="bar"><i style="width:${Math.max(0, Math.min(1, k.ratio)) * 100}%"></i></div>
